@@ -10,8 +10,8 @@ import (
 func primeNumbers(quit <-chan struct{}) <-chan int {
 	primeNumbers := []int{}
 	rtnNumber := make(chan int)
-	activeNumber := 3
-	primeNumbers = append(primeNumbers, 2)
+	activeNumber := 2
+	// primeNumbers = append(primeNumbers, 2)
 
 	go func() {
 		defer close(rtnNumber)
