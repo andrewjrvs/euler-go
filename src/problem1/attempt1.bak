@@ -1,0 +1,74 @@
+package attpt1.one
+
+import (
+	"flag"
+	"fmt"
+	"strconv"
+)
+
+func findMultiples(nbm int, min int, max int) []int {
+	var rtnArr []int
+	cnt := 1
+	for {
+		vl := nbm * cnt
+		if vl >= max {
+			break
+		} else if vl < min {
+			continue
+		}
+		rtnArr = append(rtnArr, vl)
+		cnt++
+	}
+	return rtnArr
+}
+
+func sum(input []int) int {
+	sum := 0
+
+	for _, i := range input {
+		sum += i
+	}
+
+	// fmt.Println("sum was ", sum)
+	return sum
+}
+
+func removeDuplicates(elements []int) []int {
+	// Use map to record duplicates as we find them.
+	encountered := map[int]bool{}
+	result := []int{}
+
+	for v := range elements {
+		if encountered[elements[v]] == true {
+			// Do not add duplicate.
+		} else {
+			// Record this element as an encountered element.
+			encountered[elements[v]] = true
+			// Append to result slice.
+			result = append(result, elements[v])
+		}
+	}
+	// Return the new slice.
+	return result
+}
+
+func main() {
+	group := []int{}
+	min := flag.Int("min", 0, "an int")
+	max := flag.Int("max", 10, "an int")
+
+	flag.Parse()
+
+	input := flag.Args()
+
+	for _, i := range input {
+		x, err := strconv.ParseInt(i, 10, 0)
+		if err != nil {
+			break
+		}
+		group = append(group, findMultiples(int(x), (*min), (*max))...)
+	}
+
+	group = removeDuplicates(group)
+	fmt.Println("total sum was ", sum(group))
+}
