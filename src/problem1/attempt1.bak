@@ -1,4 +1,4 @@
-package attpt1.one
+package main.attpt1
 
 import (
 	"flag"
